@@ -1,0 +1,25 @@
+package com.demo;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class LongestPalindrome {
+public static void main (String [] args) {
+	
+	String strings="We are looking for palindrome here and we found amanama and anana ";
+	List<String> listOfStrings=Stream.of(strings.split(" ")).sorted(Comparator.comparing(String::length).reversed()).collect(Collectors.toList());
+	String longestPalindrome=listOfStrings.stream().filter(s->s.equals(reversedAString(s))).sorted((s1,s2)->s1.compareTo(s2)).findFirst().get();
+	System.out.println(longestPalindrome);
+}
+
+public static String reversedAString(String s) {
+	String reversed=	s.chars()
+		    .mapToObj(c -> String.valueOf((char) c))
+		    .reduce((s1, s2) -> s2 + s1)
+		    .orElse("");
+			System.out.println(reversed);
+			return reversed;
+}
+}
